@@ -18,6 +18,8 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  getDoc,
+  updateDoc,
 
 } from 'firebase/firestore';
 
@@ -36,7 +38,26 @@ function App() {
     });
     return () => unsubscribe();
   }, []);
- 
+ const updateTaskStatus = async (taskId, newStatus) => {
+  try {
+    const taskRef = doc(db, "tasks", taskId);
+    const docSnap = await getDoc(taskRef);
+    if (docSnap.exists()) {
+      await updateDoc(taskRef, {
+        isCompleted: newStatus,
+      });
+      console.log("Task status updated.");
+    } else {
+      console.warn("Task not found");
+    }
+  } catch (err) {
+    console.error("Error updating status:", err);
+  }
+};
+const handleToggle = (taskId, newStatus) => {
+  updateTaskStatus(taskId, newStatus);
+};
+
 
 
 const addTodo = async (title, desc) => {
@@ -68,7 +89,7 @@ const addTodo = async (title, desc) => {
         <Route exact path="/" element={
           <>
             <AddTodo addTodo={addTodo} />
-            <Todos todos={todos} onDelete={onDelete} />
+            <Todos todos={todos} onDelete={onDelete} handleToggle={handleToggle}/>
           </>
         } />
         <Route exact path="/about" element={<About />} />

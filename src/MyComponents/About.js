@@ -2,7 +2,7 @@ import React from 'react'
 
 export const About = () => {
   return (
-    <div>hii
+    <div><h4>Hii.....</h4>
         <h2>About This Project</h2>
   <p>
     This is a <strong>Simple Personal Task Manager</strong> web application built using 
@@ -15,6 +15,7 @@ export const About = () => {
   </p>
   <ul>
     <li>✅ <strong>Add new tasks</strong> with a title and description</li>
+    <li>🔄 <strong>Update task status</strong> (mark as completed or not)</li>
     <li>🗑️ <strong>Delete tasks</strong></li>
     <li>📡 Experience <strong>real-time updates</strong> using Firebase’s onSnapshot listener</li>
   </ul>

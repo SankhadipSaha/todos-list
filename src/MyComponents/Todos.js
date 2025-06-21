@@ -10,7 +10,7 @@ export const Todos = (props) => {
         {props.todos.length===0? "No Todos to display":
             props.todos.map((todo)=>{
             return <TodoItems todo={todo} key={todo.id} onDelete={props.onDelete}
-             />
+             onToggle={props.handleToggle}/>
             })
         }
         
